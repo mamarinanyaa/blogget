@@ -11,7 +11,7 @@ export const Header = () => {
     <header className={style.header}>
       <Layout>
         <div className={style.gridContainer}>
-          <Logo/>
+          <Logo />
           <Heading text = 'Главная'/>
           <Search/>
           <Auth auth={false}/>
