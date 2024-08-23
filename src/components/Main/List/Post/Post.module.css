@@ -156,9 +156,9 @@
       height: 25px;
     }
   
-    .linkPost {
+    /* .linkPost {
       font-size: 26px;
-    }
+    } */
     .linkPost:hover {
       color: #cc6633;
     }
@@ -213,7 +213,7 @@
       min-height: 195px;
     }
   
-    .linkPost {
+    /* .linkPost {
       font-size: 32px;
-    }
+    } */
   }

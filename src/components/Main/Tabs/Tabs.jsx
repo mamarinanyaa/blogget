@@ -7,6 +7,7 @@ import { ReactComponent as EyeIcon } from './img/eye.svg';
 import { ReactComponent as HomeIcon } from './img/home.svg';
 import { ReactComponent as PostIcon } from './img/post.svg';
 import { ReactComponent as SaveIcon } from './img/save.svg';
+import { Text } from '../../../UI/Text/Text';
 
 const LIST = [
   {
@@ -70,7 +71,7 @@ export const Tabs = () => {
         (isDropDownOpen || !isDropDown )&&  <ul className={style.list}>
         {
           list.map(({value, id, Icon}) => (
-            <li className={style.item} key={id}>
+            <Text As='li' className={style.item} key={id}>
               <button className={style.btn} onClick={()=>{
                   setisDropDownOpen(!isDropDownOpen)
                   setTitleDropDown(value)
@@ -78,7 +79,7 @@ export const Tabs = () => {
                 {value}
                 {Icon && <Icon width={30} height={30}/>}
               </button>
-            </li>
+            </Text>
           ))
         }
       </ul>
