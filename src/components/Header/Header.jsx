@@ -6,7 +6,7 @@ import Search from './Search'
 import Auth from './Auth'
 //import PropTypes from 'prop-types';
 
-export const Header = () => {
+export const Header = ({token}) => {
   return (
     <header className={style.header}>
       <Layout>
@@ -14,7 +14,7 @@ export const Header = () => {
           <Logo />
           <Heading text = 'Главная'/>
           <Search/>
-          <Auth auth={false}/>
+          <Auth token={token}/>
         </div>
       </Layout>
     </header>

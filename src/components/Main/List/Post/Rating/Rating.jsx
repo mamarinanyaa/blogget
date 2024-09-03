@@ -1,5 +1,7 @@
 import style from '../Post.module.css';
 import { Text } from '../../../../../UI/Text/Text';
+import PropTypes from 'prop-types'
+
 
 export const Rating = ({ups}) => {
   // console.log(style);
@@ -11,3 +13,7 @@ export const Rating = ({ups}) => {
     </Text>
   );
 };
+
+Rating.propTypes = {
+  ups: PropTypes.number,
+}
