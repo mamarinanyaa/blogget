@@ -5,14 +5,18 @@ import {Text} from '../../../UI/Text/Text';
 import PropTypes from 'prop-types';
 import {URL} from '../../../api/const'
 import { useEffect, useState } from 'react';
+import {useAuth} from '../../../hooks/useAuth'
 
-export const Auth = ({token}) => {
+export const Auth = ({token, delToken}) => {
 
   const [auth, setAuth] = useState({});
+  // const [auth, resetAuth] = useAuth(token)
+
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     if (!token) return;
-    console.log('Auth');
+    
     fetch(`${URL}/api/v1/me`, {
       headers: {
         Authorization: `bearer ${token}`,
@@ -22,6 +26,7 @@ export const Auth = ({token}) => {
       const img = iconImg.replace(/\?.*$/,'');
       setAuth({name, img})
     });
+    
   }, [token])
 
   // useEffect(() => {
@@ -31,10 +36,18 @@ export const Auth = ({token}) => {
   return (
     <div className={style.container}>
       {auth.name ? (
-        <button className={style.btn}>
-          <img className={style.img} src={'img'} title={auth.name}/>
-        </button>
-        
+        <>
+          <button className={style.btn} onClick={()=>{
+            setIsLogged(!isLogged);
+          }}>
+            <img className={style.img} src={'img'} title={auth.name}/>
+          </button>
+          {isLogged ? (<button className={style.logout} onClick={()=>{
+            delToken();
+            setAuth({});
+            // resetAuth();
+            }}>Выйти</button>): null}
+        </>
       ) : (
         <Text As='a' href={urlAuth}>
           <LoginIcon className={style.svg} />

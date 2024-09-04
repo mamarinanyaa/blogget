@@ -5,11 +5,11 @@ import { useToken } from './hooks/useToken.js';
 
 function App() {
   
-  const [token] = useToken('');
+  const [token, delToken] = useToken('');
   console.log('render app');
   return (
   <>
-    <Header token={token}/>
+    <Header token={token} delToken={delToken}/>
     <Main/>
   </>
   );
