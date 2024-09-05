@@ -9,25 +9,10 @@ import {useAuth} from '../../../hooks/useAuth'
 
 export const Auth = ({token, delToken}) => {
 
-  const [auth, setAuth] = useState({});
-  // const [auth, resetAuth] = useAuth(token)
+  // const [auth, setAuth] = useState({});
+  const [auth, resetAuth] = useAuth(token)
 
   const [isLogged, setIsLogged] = useState(false);
-
-  useEffect(() => {
-    if (!token) return;
-    
-    fetch(`${URL}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    }).then(response => response.json())
-    .then(({name, icon_img: iconImg}) => {
-      const img = iconImg.replace(/\?.*$/,'');
-      setAuth({name, img})
-    });
-    
-  }, [token])
 
   // useEffect(() => {
   //   console.log(auth);
@@ -44,8 +29,7 @@ export const Auth = ({token, delToken}) => {
           </button>
           {isLogged ? (<button className={style.logout} onClick={()=>{
             delToken();
-            setAuth({});
-            // resetAuth();
+            resetAuth();
             }}>Выйти</button>): null}
         </>
       ) : (

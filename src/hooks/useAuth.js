@@ -21,6 +21,9 @@ export const useAuth = (token) => {
         .then(({name, icon_img: iconImg}) => {
             const img = iconImg.replace(/\?.*$/,'');
             setAuth({name, img})
+        }).catch((err) => {
+            console.log(err);
+            resetAuth();
         });
         
     }, [token])
