@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import {URL} from '../api/const'
+import { tokenContext } from "../context/tokenContext";
 
-export const useAuth = (token) => {
+export const useAuth = () => {
     const [auth, setAuth] = useState({});
+    const {token, delToken} = useContext(tokenContext);
 
     const resetAuth = () => {
         setAuth({})
@@ -17,16 +19,27 @@ export const useAuth = (token) => {
             headers: {
             Authorization: `bearer ${token}`,
             },
-        }).then(response => response.json())
-        .then(({name, icon_img: iconImg}) => {
-            const img = iconImg.replace(/\?.*$/,'');
+        }).then(response => {
+            if (response.status === 401) {
+                throw new Error(response.status)
+            }
+            return response.json()
+        })
+        .then(({name, icon_img}) => {
+            const img = icon_img.replace(/\?.*$/,'');
             setAuth({name, img})
+            // console.log({name, img});
         }).catch((err) => {
             console.log(err);
             resetAuth();
+            delToken();
         });
         
     }, [token])
 
     return [auth, resetAuth];
 }
+
+
+
+

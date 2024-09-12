@@ -1,17 +1,19 @@
 //import logo from './logo.svg';
 import {Header} from './components/Header/Header.jsx';
 import { Main } from './components/Main/Main/Main.jsx';
-import { useToken } from './hooks/useToken.js';
+import { TokenContextProvider } from './context/tokenContext.jsx';
+import { AuthContextProvider } from './context/authContext.jsx';
 
 function App() {
-  
-  const [token, delToken] = useToken('');
+
   console.log('render app');
-  return (
-  <>
-    <Header token={token} delToken={delToken}/>
-    <Main/>
-  </>
+  return ( 
+    <TokenContextProvider>
+      <AuthContextProvider>
+        <Header />
+        <Main/>
+      </AuthContextProvider>
+    </TokenContextProvider>
   );
 }
 

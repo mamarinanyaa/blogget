@@ -4,14 +4,15 @@ import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
 import PropTypes from 'prop-types';
 import {URL} from '../../../api/const'
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import {useAuth} from '../../../hooks/useAuth'
+import { tokenContext } from '../../../context/tokenContext';
+import { authContext } from '../../../context/authContext';
 
-export const Auth = ({token, delToken}) => {
+export const Auth = () => {
 
-  // const [auth, setAuth] = useState({});
-  const [auth, resetAuth] = useAuth(token)
-
+  const {delToken} = useContext(tokenContext)
+  const {auth, resetAuth} = useContext(authContext)
   const [isLogged, setIsLogged] = useState(false);
 
   // useEffect(() => {
