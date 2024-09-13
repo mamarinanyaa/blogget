@@ -9,10 +9,12 @@ import { Date } from './Date/Date';
 
 export const Post = ({postData}) => {
   const {title, author, ups, thumbnail, date} = postData;
+  // console.log(thumbnail);
   
   return (
     <li className={style.post}>
-      <img className={style.img} src={thumbnail ? thumbnail : notphoto} alt=""></img>
+      {/* <Thumbnail><img.../></Thumbnail> */}
+      <img className={style.img} src={thumbnail != 'self' ? thumbnail : notphoto} alt=""></img>  
 
       <Content title={title} author={author}/>
       <Rating ups={ups} />
