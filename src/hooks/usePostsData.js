@@ -11,6 +11,8 @@ export const usePostsData = () => {
 
         if (!token) return;
 
+        setPostsData([])
+
         fetch(`${URL}/best`, {
             method: 'GET', 
             headers: {

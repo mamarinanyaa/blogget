@@ -7,6 +7,8 @@ export const List = () => {
 
   const [postsData] = usePostsData()
 
+  // console.log(postsData);
+
   return (
     <ul className={style.list}>
       <postsContext.Provider value={{postsData}}>

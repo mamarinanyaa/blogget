@@ -8,15 +8,15 @@ import { Date } from './Date/Date';
 
 
 export const Post = ({postData}) => {
-  const {title, author, ups, thumbnail, date} = postData;
-  // console.log(thumbnail);
+  const {id, title, author, ups, thumbnail, date} = postData;
+  // console.log(id);
   
   return (
     <li className={style.post}>
       {/* <Thumbnail><img.../></Thumbnail> */}
       <img className={style.img} src={thumbnail != 'self' ? thumbnail : notphoto} alt=""></img>  
 
-      <Content title={title} author={author}/>
+      <Content id={id} title={title} author={author} />
       <Rating ups={ups} />
       <Date date={date ? date : '2024-08-07T09:45:00.000Z'}/>
       
