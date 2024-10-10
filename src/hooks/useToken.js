@@ -14,7 +14,7 @@ export const useToken = (state) => {
     useEffect (() => {
         
         if (window.location.pathname.includes('/auth')){
-            console.log('useToken');
+            // console.log('useToken');
             const token = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
             setToken(token);
         }
@@ -25,7 +25,7 @@ export const useToken = (state) => {
 
     useEffect(() => {
         if (token){
-            console.log('useToken [token]');
+            // console.log('useToken [token]');
             localStorage.setItem('bearer', token);
         }
     }, [token])

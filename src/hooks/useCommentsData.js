@@ -5,7 +5,7 @@ import { URL } from "../api/const";
 export const useCommentsData = (id) => {
 
     const {token} = useContext(tokenContext)
-    const [commentsData, setCommentsData] = useState({})
+    const [postData, setPostData] = useState({})
 
     const [comments, setComments] = useState([])
 
@@ -13,7 +13,7 @@ export const useCommentsData = (id) => {
 
         if (!token) return;
 
-        setCommentsData({})
+        setPostData({})
         setComments([{body: 'Loading...'}])
 
         fetch(`${URL}/comments/${id}`, {
@@ -37,6 +37,7 @@ export const useCommentsData = (id) => {
                     body: el.data.body
                 }
             })
+            
 
             setComments(data[1].data.children.map((el) => {
                 // console.log(el);
@@ -47,11 +48,11 @@ export const useCommentsData = (id) => {
             }))
             
             const datapost = {title: dataPost.title, author: dataPost.author, markdown: dataPost.selftext, comments: dataComment}
-            setCommentsData(datapost)
+            setPostData(datapost)
             // console.log(datapost.comments);
         });
     }, [token])
 
-    return [commentsData, comments];
+    return [postData, comments];
 }
 

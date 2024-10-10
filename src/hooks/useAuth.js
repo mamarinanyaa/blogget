@@ -13,7 +13,7 @@ export const useAuth = () => {
     useEffect(() => {
 
         if (!token) return;
-        console.log('useAuth');
+        // console.log('useAuth');
         
         fetch(`${URL}/api/v1/me`, {
             headers: {
