@@ -1,28 +1,11 @@
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { commentReducer } from "./commentReducer";
+import { tokenReducer, tokenMiddleware } from "./tokenReducer";
 
-const initialState = {
-    comment: 'Hello Redux',
-}
-
-export const updateComment = (value) => {
-    return {
-        type: 'UPDATE_COMMENT',
-        comment: value
-    }
-}
-
-const rootReducer = (state = initialState , action) => {
-    switch (action.type) {
-        
-        case 'UPDATE_COMMENT':
-            return {
-                ...state,
-                comment: action.comment
-            };
-
-        default:
-            return state;
-    }
-};
+const rootReducer = combineReducers({
+    commentReducer,
+    tokenReducer
+});
   
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(tokenMiddleware)));

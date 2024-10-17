@@ -9,12 +9,10 @@ import { store } from './store/index.js';
 function App() {
   return (
     <Provider store={store}>
-      <TokenContextProvider>
         <AuthContextProvider>
           <Header />
           <Main/>
         </AuthContextProvider>
-      </TokenContextProvider>
     </Provider>
   );
 }

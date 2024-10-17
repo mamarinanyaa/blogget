@@ -3,21 +3,27 @@ import { ReactComponent as LoginIcon } from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
 import PropTypes from 'prop-types';
-import {URL} from '../../../api/const'
 import { useContext, useState } from 'react';
-import {useAuth} from '../../../hooks/useAuth'
-import { tokenContext } from '../../../context/tokenContext';
 import { authContext } from '../../../context/authContext';
+import { getToken, setToken } from '../../../hooks/token';
+import { useDispatch } from 'react-redux';
+import { deleteToken, updateToken } from '../../../store/tokenReducer';
 
 export const Auth = () => {
 
-  const {delToken} = useContext(tokenContext)
+  // const {delToken} = useContext(tokenContext)
   const {auth, resetAuth} = useContext(authContext)
   const [isLogged, setIsLogged] = useState(false);
 
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   console.log(auth);
   // }, [auth]);
+
+  const handleClick = () => {
+    window.location.href = urlAuth;
+    dispatch(updateToken(getToken()))
+  }
   
   return (
     <div className={style.container}>
@@ -29,12 +35,13 @@ export const Auth = () => {
             <img className={style.img} src={'img'} title={auth.name}/>
           </button>
           {isLogged ? (<button className={style.logout} onClick={()=>{
-            delToken();
+            // delToken();
+            dispatch(deleteToken());
             resetAuth();
             }}>Выйти</button>): null}
         </>
       ) : (
-        <Text As='a' href={urlAuth}>
+        <Text As='a' onClick={handleClick}>
           <LoginIcon className={style.svg} />
         </Text>
       )}
