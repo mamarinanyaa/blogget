@@ -7,7 +7,7 @@ import { useContext, useState } from 'react';
 import { authContext } from '../../../context/authContext';
 import { getToken, setToken } from '../../../hooks/token';
 import { useDispatch } from 'react-redux';
-import { deleteToken, updateToken } from '../../../store/tokenReducer';
+import { deleteToken, updateToken } from '../../../store/tokenReducer.js';
 
 export const Auth = () => {
 
@@ -22,7 +22,6 @@ export const Auth = () => {
 
   const handleClick = () => {
     window.location.href = urlAuth;
-    dispatch(updateToken(getToken()))
   }
   
   return (
@@ -36,12 +35,12 @@ export const Auth = () => {
           </button>
           {isLogged ? (<button className={style.logout} onClick={()=>{
             // delToken();
-            dispatch(deleteToken());
+            // dispatch(deleteToken());
             resetAuth();
             }}>Выйти</button>): null}
         </>
       ) : (
-        <Text As='a' onClick={handleClick}>
+        <Text As='a' href={urlAuth}>
           <LoginIcon className={style.svg} />
         </Text>
       )}

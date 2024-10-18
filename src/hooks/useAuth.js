@@ -1,20 +1,25 @@
 import { useContext, useEffect, useState } from "react"
 import {URL} from '../api/const'
-import { useSelector } from "react-redux";
-import { deleteToken } from "../store/tokenReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteToken } from "../store/tokenReducer.js";
 
 export const useAuth = () => {
     const [auth, setAuth] = useState({});
     // const {token, delToken} = useContext(tokenContext);
     const token = useSelector(state => state.tokenReducer.token)
+    const dispatch = useDispatch()
 
     const resetAuth = () => {
         setAuth({})
+        dispatch(deleteToken())
     }
 
     useEffect(() => {
 
-        if (!token) return;
+        if (!token) {
+            console.log('!token');
+            return
+        };
         // console.log('useAuth');
         
         fetch(`${URL}/api/v1/me`, {
@@ -34,8 +39,6 @@ export const useAuth = () => {
         }).catch((err) => {
             console.log(err);
             resetAuth();
-            // delToken();
-            deleteToken();
         });
         
     }, [token])

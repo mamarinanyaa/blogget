@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { tokenContext } from "../context/tokenContext";
-import { URL } from "../api/const";
+import { URL } from "../api/const.js";
 import { useSelector } from "react-redux";
 
 export const useCommentsData = (id) => {
