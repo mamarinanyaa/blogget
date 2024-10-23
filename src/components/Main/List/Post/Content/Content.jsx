@@ -19,7 +19,7 @@ export const Content = ({id, title, author}) => {
           <Delete width={30} height={30}/>
         </button>
         <Text As='h2' className={style.title}>
-          <Text As='a' size={18} tsize={24} className={style.linkPost} href='#post' onClick={() => { setIsModalOpen(true) }}>{title}</Text>
+          <Text As='a' size={18} tsize={24} className={style.linkPost} onClick={() => { setIsModalOpen(true) }}>{title}</Text>
         </Text>
         <Text As='a' size={12} tsize={24} color='orange' className={style.linkAuthor} href='#author'>{author}</Text>
         {isModalOpen && <Modal id={id} closeModal={closeModal}/>}

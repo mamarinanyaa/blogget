@@ -1,6 +1,5 @@
 import style from './List.module.css';
 import Post from './Post';
-import { postsContext } from '../../../context/postsContext';
 import { usePostsData } from '../../../hooks/usePostsData';
 
 export const List = () => {
@@ -11,9 +10,7 @@ export const List = () => {
 
   return (
     <ul className={style.list}>
-      <postsContext.Provider value={{postsData}}>
-        {postsData.map((postData, index) => (<Post key = {index} postData={postData} />))}
-      </postsContext.Provider>
+      {postsData.map((postData, index) => (<Post key = {index} postData={postData} />))}
     </ul>
   );
 };

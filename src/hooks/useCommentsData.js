@@ -8,7 +8,6 @@ export const useCommentsData = (id) => {
     // const {token} = useContext(tokenContext)
     const token = useSelector(state=>state.tokenReducer.token)
     const [postData, setPostData] = useState({})
-
     const [comments, setComments] = useState([])
 
     useEffect (() => {
@@ -21,8 +20,8 @@ export const useCommentsData = (id) => {
         fetch(`${URL}/comments/${id}`, {
             method: 'GET', 
             headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         }).then((response)=> {
             // console.log(response);
@@ -49,10 +48,9 @@ export const useCommentsData = (id) => {
                 }
             }))
             
-            const datapost = {title: dataPost.title, author: dataPost.author, markdown: dataPost.selftext, comments: dataComment}
-            setPostData(datapost)
-            // console.log(datapost.comments);
+            setPostData({title: dataPost.title, author: dataPost.author, markdown: dataPost.selftext, comments: dataComment})
         });
+
     }, [token])
 
     return [postData, comments];

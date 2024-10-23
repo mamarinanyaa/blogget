@@ -34,10 +34,12 @@
 // }
 
 export const setToken = (token) => {
+    // console.log('set token');
     localStorage.setItem('bearer', token);
 }
 
 export const getToken = () => {
+    // console.log('get token');
     let token = '';
 
     if (window.location.pathname.includes('/auth')){

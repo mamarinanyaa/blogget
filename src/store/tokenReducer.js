@@ -1,21 +1,26 @@
-import { getToken, setToken } from "../hooks/token.js";
+import { setToken } from "../hooks/token.js";
 
 const initialState = {
     token: '',
 }
 
 export const tokenMiddleware = (store) => (next) => (action) => {
-    switch (action.type) {
+    // switch (action.type) {
 
-        case 'UPDATE_TOKEN':
-            setToken(action.token);
-            break;
+    //     case 'UPDATE_TOKEN':
+    //         setToken(action.token);
+    //         break;
 
-        case 'DELETE_TOKEN':
-            setToken('');
-            break;
-    }
-    next(action);
+    //     case 'DELETE_TOKEN':
+    //         setToken('');
+    //         break;
+    // }
+    // console.log('middleware');
+    if (action.type == 'UPDATE_TOKEN')
+        setToken(action.token);
+    if (action.type == 'DELETE_TOKEN')
+        setToken('');
+    next(action); // доходит до reducer
 }
 
 export const updateToken = (value) => {
@@ -26,6 +31,7 @@ export const updateToken = (value) => {
 }
 
 export const deleteToken = () => {
+    console.log('del tok');
     return {
         type: 'DELETE_TOKEN',
         token: ''
