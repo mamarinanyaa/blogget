@@ -9,7 +9,7 @@ import { Comments } from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment'
 
 export const Modal = ({id, closeModal}) => {
-  const [postData, comments] = useCommentsData(id);
+  const [postCommentsData] = useCommentsData(id);
 
   const handleClick = (e) => {
 
@@ -32,7 +32,7 @@ export const Modal = ({id, closeModal}) => {
   return (
     <div className={style.overlay}>
       <div className={style.modal}>
-        <h2 className={style.title}>{postData.title}</h2>
+        <h2 className={style.title}>{postCommentsData.title}</h2>
         
         <div className={style.content}>
           <Markdown options={{
@@ -44,14 +44,14 @@ export const Modal = ({id, closeModal}) => {
               },
             },
           }}>
-            {postData.markdown}
+            {postCommentsData.markdown}
           </Markdown>
             
         </div>
 
-        <p className={style.author}>{postData.author}</p>
+        <p className={style.author}>{postCommentsData.author}</p>
 
-        <Comments comments={comments}/>
+        <Comments comments={postCommentsData.comments}/>
         <FormComment />
 
         <button className={style.close} onClick={closeModal}>

@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import { URL } from "../api/const";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postsdataRequest, postsdataRequestAsync, postsdataRequestError, postsdataRequestSuccess, postsdataReset } from "../store/postsdata/action.js"
+import { postsdataRequestAsync } from "../store/postsdata/action.js"
 
 export const usePostsData = () => {
 
-    const token = useSelector(state => state.tokenReducer.token)
-    // const [postsData, setPostsData] = useState([])
+    const token = useSelector(state => state.tokenReducer.token);
     const postsData = useSelector(state => state.postsdataReducer.data)
     const dispatch = useDispatch();
 
