@@ -5,17 +5,7 @@ const initialState = {
 }
 
 export const tokenMiddleware = (store) => (next) => (action) => {
-    // switch (action.type) {
 
-    //     case 'UPDATE_TOKEN':
-    //         setToken(action.token);
-    //         break;
-
-    //     case 'DELETE_TOKEN':
-    //         setToken('');
-    //         break;
-    // }
-    // console.log('middleware');
     if (action.type == 'UPDATE_TOKEN')
         setToken(action.token);
     if (action.type == 'DELETE_TOKEN')

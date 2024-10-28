@@ -3,6 +3,7 @@ import { POSTSDATA_REQUEST, POSTSDATA_REQUEST_SUCCESS, POSTSDATA_REQUEST_ERROR, 
 const initialState = {
     data: [],
     error: '',
+    status: ''
 }
 
 export const postsdataReducer = (state = initialState, action) => {
@@ -11,9 +12,16 @@ export const postsdataReducer = (state = initialState, action) => {
         case POSTSDATA_REQUEST:
             return {
                 ...state,
+                status: 'loading'
             }
 
         case POSTSDATA_REQUEST_SUCCESS:
+            return {
+                ...state,
+                data: action.data,
+                status: 'loaded'
+            }
+
         case POSTSDATA_RESET:
             return {
                 ...state,
@@ -23,7 +31,8 @@ export const postsdataReducer = (state = initialState, action) => {
         case POSTSDATA_REQUEST_ERROR:
             return {
                 ...state,
-                error: action.error
+                error: action.error,
+                status: 'error'
             }
 
         default:

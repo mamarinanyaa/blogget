@@ -1,7 +1,7 @@
-import style from './AuthLoader.module.css';
+import style from './Preloader.module.css';
 import BeatLoader from 'react-spinners/BeatLoader'
 
-export const AuthLoader = () => {
+export const Preloader = () => {
   return (
     <div>
       <BeatLoader />

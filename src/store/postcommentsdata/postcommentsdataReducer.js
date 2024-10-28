@@ -7,6 +7,7 @@ const initialState = {
         markdown: '',
         comments: [{body: 'Loading...'}]
     },
+    status: '',
     error: ''
 }
 
@@ -16,19 +17,22 @@ export const postcommentsdataReducer = (state=initialState, action) => {
         case POSTCOMMENTSDATA_REQUEST:
             return {
                 ...state,
-                data: action.data
+                data: action.data,
+                status: 'loading',
             }
 
         case POSTCOMMENTSDATA_REQUEST_SUCCESS:
             return {
                 ...state,
-                data: action.data
+                data: action.data,
+                status: 'loaded',
             }
 
         case POSTCOMMENTSDATA_REQUEST_ERROR:
             return {
                 ...state,
-                error: action.error
+                error: action.error,
+                status: 'error',
             }
 
         default:

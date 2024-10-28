@@ -7,9 +7,11 @@ import { useEffect } from 'react';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { Comments } from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment'
+import { useSelector } from 'react-redux';
 
 export const Modal = ({id, closeModal}) => {
   const [postCommentsData] = useCommentsData(id);
+  const status = useSelector(state=>state.postcommentsdataReducer.status);
 
   const handleClick = (e) => {
 
@@ -32,31 +34,38 @@ export const Modal = ({id, closeModal}) => {
   return (
     <div className={style.overlay}>
       <div className={style.modal}>
-        <h2 className={style.title}>{postCommentsData.title}</h2>
-        
-        <div className={style.content}>
-          <Markdown options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
+        {status === 'loading' && 'Loading...'}
+        {status === 'error' && 'Error'}
+        {status === 'loaded' && (
+          <>
+            <h2 className={style.title}>{postCommentsData.title}</h2>
+          
+            <div className={style.content}>
+              <Markdown options={{
+                overrides: {
+                  a: {
+                    props: {
+                      target: '_blank',
+                    },
+                  },
                 },
-              },
-            },
-          }}>
-            {postCommentsData.markdown}
-          </Markdown>
-            
-        </div>
+              }}>
+                {postCommentsData.markdown}
+              </Markdown>
+                
+            </div>
 
-        <p className={style.author}>{postCommentsData.author}</p>
+            <p className={style.author}>{postCommentsData.author}</p>
 
-        <Comments comments={postCommentsData.comments}/>
-        <FormComment />
+            <Comments comments={postCommentsData.comments}/>
+            <FormComment />
 
-        <button className={style.close} onClick={closeModal}>
-          <CloseIcon />
-        </button>
+            <button className={style.close} onClick={closeModal}>
+              <CloseIcon />
+            </button>
+          </>
+        )}
+        
       </div>
     </div>
   );

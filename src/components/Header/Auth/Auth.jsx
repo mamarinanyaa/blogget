@@ -5,7 +5,7 @@ import {Text} from '../../../UI/Text/Text';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useAuth } from '../../../hooks/useAuth.js';
-import {AuthLoader} from './AuthLoader/AuthLoader.jsx'
+import {Preloader} from '../../../UI/Preloader/Preloader.jsx'
 
 export const Auth = () => {
 
@@ -16,7 +16,7 @@ export const Auth = () => {
   
   return (
     <div className={style.container}>
-      {loading ?(<AuthLoader />) : auth.name ? (
+      {loading ?(<Preloader />) : auth.name ? (
         <>
           <button className={style.btn} onClick={()=>{
             setIsLogged(!isLogged);
