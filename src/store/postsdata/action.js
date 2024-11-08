@@ -14,7 +14,8 @@ export const postsdataRequest = () => ({
 
 export const postsdataRequestSuccess = (data) => ({
     type: POSTSDATA_REQUEST_SUCCESS,
-    data,
+    data: data.posts,
+    after: data.after
 })
 
 export const postsdataRequestError = (error) => ({
@@ -30,17 +31,20 @@ export const postsdataReset = () => ({
 
 export const postsdataRequestAsync = () => (dispatch, getState) => {
     const token = getState().tokenReducer.token;
+    const after = getState().postsdataReducer.after;
 
     if (!token) {
         console.log('not token');
         dispatch(postsdataReset());
         return;
     };
+
+    // console.log(after);
     
     dispatch(postsdataRequest());
     dispatch(postsdataReset());
 
-    axios(`${URL}/best`, {
+    axios(`${URL}/best?limit=10&${after ? `after=${after}` : ``}`, {
         method: 'GET', 
         headers: {
             'Content-Type': 'application/json',
@@ -48,11 +52,12 @@ export const postsdataRequestAsync = () => (dispatch, getState) => {
         }
     }).then(({data}) => {
 
-        let resdata = []
+        let posts = []
         data.data.children.forEach(element => {
-            resdata = [...resdata, element.data]
+            posts = [...posts, element.data]
         });
-        dispatch(postsdataRequestSuccess(resdata))
+
+        dispatch(postsdataRequestSuccess({posts, after: data.data.after}))
 
     }).catch(err => {
         dispatch(postsdataRequestError(err.message));

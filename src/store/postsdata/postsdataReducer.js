@@ -3,7 +3,8 @@ import { POSTSDATA_REQUEST, POSTSDATA_REQUEST_SUCCESS, POSTSDATA_REQUEST_ERROR, 
 const initialState = {
     data: [],
     error: '',
-    status: ''
+    status: '',
+    after: '',
 }
 
 export const postsdataReducer = (state = initialState, action) => {
@@ -19,7 +20,8 @@ export const postsdataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: action.data,
-                status: 'loaded'
+                status: 'loaded',
+                after: action.after,
             }
 
         case POSTSDATA_RESET:
