@@ -8,7 +8,6 @@ export const usePostsData = () => {
     const postsData = useSelector(state => state.postsdataReducer.data)
     const dispatch = useDispatch();
 
-    
     useEffect (() => {
         dispatch(postsdataRequestAsync());
     }, [token])

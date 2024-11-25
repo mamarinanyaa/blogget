@@ -8,23 +8,28 @@ import { ReactComponent as HomeIcon } from './img/home.svg';
 import { ReactComponent as PostIcon } from './img/post.svg';
 import { ReactComponent as SaveIcon } from './img/save.svg';
 import { Text } from '../../../UI/Text/Text';
+import { useNavigate } from 'react-router-dom';
 
 const LIST = [
   {
     value: 'Главная',
     Icon: HomeIcon,
+    link: 'rising'
   },
   {
-    value: 'Просмотренные',
+    value: 'Топ',
     Icon: EyeIcon,
+    link: 'top'
   },
   {
-    value: 'Сохранённые',
+    value: 'Лучшие',
     Icon: SaveIcon,
+    link: 'best'
   },
   {
-    value: 'Мои посты',
+    value: 'Горячие',
     Icon: PostIcon,
+    link: 'hot'
   },
 ].map(assignId);
 
@@ -34,6 +39,7 @@ export const Tabs = () => {
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [isDropDown, setisDropDown] = useState(false);
   const [titleDropDown, setTitleDropDown] = useState('addItem');
+  const navigate = useNavigate();
 
   const handleRisize = () => {
     if (document.documentElement.clientWidth < 768)
@@ -68,21 +74,23 @@ export const Tabs = () => {
       }
       
       {
-        (isDropDownOpen || !isDropDown )&&  <ul className={style.list}>
-        {
-          list.map(({value, id, Icon}) => (
-            <Text As='li' className={style.item} key={id}>
-              <button className={style.btn} onClick={()=>{
-                  setisDropDownOpen(!isDropDownOpen)
-                  setTitleDropDown(value)
-                }}>
-                {value}
-                {Icon && <Icon width={30} height={30}/>}
-              </button>
-            </Text>
-          ))
-        }
-      </ul>
+        (isDropDownOpen || !isDropDown )&&  
+        <ul className={style.list}>
+          {
+            list.map(({value, link, id, Icon}) => (
+              <Text As='li' className={style.item} key={id}>
+                <button className={style.btn} onClick={()=>{
+                    setisDropDownOpen(!isDropDownOpen);
+                    setTitleDropDown(value);
+                    navigate(`/category/${link}`)
+                  }}>
+                  {value}
+                  {Icon && <Icon width={30} height={30}/>}
+                </button>
+              </Text>
+            ))
+          }
+        </ul>
       }
     </div>
   );

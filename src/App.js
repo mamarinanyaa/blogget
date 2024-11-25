@@ -6,20 +6,20 @@ import { useDispatch} from 'react-redux';
 import { store } from './store/index.js';
 import { updateToken } from './store/tokenReducer.js';
 import { getToken } from './hooks/token.js';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const dispatch = useDispatch();
   dispatch(updateToken(getToken()));
   return (
-    
-      // <AuthContextProvider>
-      <>
-        <Header />
-        <Main/>
-      </>
-        
-      // </AuthContextProvider>
-
+    <Routes>
+      <Route path='*' element={
+        <>
+          <Header />
+          <Main/>
+        </>
+      }/>
+    </Routes>
   );
 }
 

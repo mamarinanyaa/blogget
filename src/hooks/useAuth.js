@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToken } from "../store/tokenReducer.js";
 import { authLogout, authRequestAsync } from "../store/auth/action.js";
+import { postsdataRequestAsync } from "../store/postsdata/action.js";
 
 
 export const useAuth = () => {
@@ -19,6 +20,7 @@ export const useAuth = () => {
 
     useEffect(() => {
         dispatch(authRequestAsync()); //async action creator
+        // dispatch(postsdataRequestAsync());
     }, [token])
 
     return [auth, loading, resetAuth];
